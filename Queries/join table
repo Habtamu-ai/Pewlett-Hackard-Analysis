@@ -1,0 +1,48 @@
+---------Create Schema http://sqlfiddle.com/#!9/74a2b1/77
+CREATE TABLE Salesperson(ID INT primary key NOT NULL,
+						 Name varchar(50),
+						 Age INT,
+						 Salary float);
+INSERT INTO Salesperson(ID, Name,Age,Salary)VALUES(1,'Abe',61,140000);
+INSERT INTO Salesperson(ID, Name,Age,Salary)VALUES(2,'Bob',34,44000);
+INSERT INTO Salesperson(ID, Name,Age,Salary)VALUES(5,'Chris',34,40000);
+INSERT INTO Salesperson(ID, Name,Age,Salary)VALUES(7,'Dan',41,55000);
+INSERT INTO Salesperson(ID, Name,Age,Salary)VALUES(8,'Ken',57,115000);
+INSERT INTO Salesperson(ID, Name,Age,Salary)VALUES(11,'Joe',38,38000);
+CREATE TABLE Customer(ID INT primary key NOT NULL,
+						 Name varchar(50),
+						 City varchar(50),
+						 Industry_Type char);
+INSERT INTO Customer(ID, Name,City,Industry_Type)VALUES(4,'Samsonic','pleasant','J');
+INSERT INTO Customer(ID, Name,City,Industry_Type)VALUES(6,'Panasung','oaktown','J');
+INSERT INTO Customer(ID, Name,City,Industry_Type)VALUES(7,'Samony','jackson','B');
+INSERT INTO Customer(ID, Name,City,Industry_Type)VALUES(9,'Orange','jackson','B');
+CREATE TABLE Orders(    Number INT primary key NOT NULL,
+						order_date DATE NOT NULL,
+						cust_id  INT ,
+						salesperson_id INT,
+						Amount INT,
+						foreign key(salesperson_id) REFERENCES Salesperson(ID),
+						foreign key(cust_id) REFERENCES Customer(ID));
+INSERT INTO Orders(Number,order_date,cust_id ,salesperson_id,Amount)VALUES(10,'1996-08-2',4,2,540);
+INSERT INTO Orders(Number,order_date,cust_id ,salesperson_id,Amount)VALUES(20,'1999-01-30',4,8,1800);
+INSERT INTO Orders(Number,order_date,cust_id ,salesperson_id,Amount)VALUES(30,'1995-07-14',9,1,460);
+INSERT INTO Orders(Number,order_date,cust_id ,salesperson_id,Amount)VALUES(40,'1998-01-29',7,2,2400);
+INSERT INTO Orders(Number,order_date,cust_id ,salesperson_id,Amount)VALUES(50,'1998-02-3',6,7,600);
+INSERT INTO Orders(Number,order_date,cust_id ,salesperson_id,Amount)VALUES(60,'1998-03-2',6,7,720);
+INSERT INTO Orders(Number,order_date,cust_id ,salesperson_id,Amount)VALUES(70,'1998-05-6',9,7,150);
+
+######33
+-- sales by orders joins inner 
+SELECT *
+FROM salesperson AS sl
+	JOIN orders AS ord on sl.id = ord.salesperson_id;
+-- Order by costumer
+SELECT *
+FROM customer cst
+	JOIN orders ord on cst.id = ord.cust_id
+--- Big table
+SELECT *
+FROM orders ord 
+	LEFT JOIN customer cst on cst.id = ord.cust_id
+	LEFT JOIN salesperson sl on sl.id = ord.salesperson_id 
