@@ -1,0 +1,15 @@
+SELECT count(*)FROM film;
+SELECT * FROM film;
+SELECT count (1) film;-- equivalent to film id
+SELECT count (1) AS "total_films" FROM film;--
+SELECT title  movie_name FROM film;
+----- Group by--
+SELECT rating,
+       count(1) count_films
+From film
+GROUP BY rating
+----Average
+SELECT avg (rental_duration) FROM film;
+SELECT FLOOR(avg) (rental_duration) FROM film;
+SELECT Celing(avg) (rental_duration) FROM film;
+-----

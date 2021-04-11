@@ -28,6 +28,7 @@ LEFT JOIN dept_manager as dm
 ON ri.emp_no = dm.emp_no
 WHERE dm.to_date = ('9999-01-01');
 SELECT*FROM current_emp;
+
 #### count,group and orderby(finding the retiree people)
 -- Employee count by department number
 SELECT COUNT(ce.emp_no), de.dept_no
@@ -54,7 +55,7 @@ WHERE (e.birth_date BETWEEN '1952-01-01' AND '1955-12-31')
      AND (e.hire_date BETWEEN '1985-01-01' AND '1988-12-31')
 	 AND (de.to_date = '9999-01-01');
 
-     -- List of managers per department#department info
+-- List of managers per department#department info
 SELECT  dm.dept_no,
         d.dept_name,
         dm.emp_no,
@@ -69,7 +70,7 @@ FROM dept_manager AS dm
     INNER JOIN current_emp AS ce
         ON (dm.emp_no = ce.emp_no);
 
-        ---creating department info		
+---creating department info		
 SELECT ce.emp_no, 
      ce.first_name, 
 	 ce.last_name, 
